@@ -20,7 +20,6 @@ class _CityDropDownState extends State<CityDropDown> {
          builder: (BuildContext context, snapshot) {
            if(snapshot.hasData) {
              final dynamic jsonVar = snapshot.data;
-
              return DropdownButton(
                itemHeight: 50.0,
                isExpanded: true,
@@ -34,7 +33,7 @@ class _CityDropDownState extends State<CityDropDown> {
                          ),
                       )
                   : const <DropdownMenuItem<String>>[],
-               value: _dropdownValue.isNotEmpty ? _dropdownValue : null,
+               value: _dropdownValue.isEmpty || !jsonVar[widget.region].contains(_dropdownValue) ? null : _dropdownValue,
                onChanged: dropdownCallback,
              );
            } else if (snapshot.hasError) {

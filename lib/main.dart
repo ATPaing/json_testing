@@ -1,7 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'JsonLocal/getLocalJson.dart';
 import 'chooseCity.dart';
 import 'dropDown.dart';
 
@@ -31,6 +28,7 @@ class _MyAppState extends State<MyApp> {
             onRegionSelected: (region) {
               setState(() {
                 selectedRegion = region; // Step 3: Set the selected region
+
               });
             },
           ),

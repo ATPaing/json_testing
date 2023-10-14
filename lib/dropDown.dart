@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'chooseCity.dart';
-
 
 class DropDownWidget extends StatefulWidget {
   final void Function(String) onRegionSelected; // Step 1: Define a callback function
@@ -36,6 +34,7 @@ class _DropDownState extends State<DropDownWidget>{
 
   @override
   Widget build(BuildContext context) {
+
     return DropdownButton(
             itemHeight: 50.0,
             isExpanded: true,
@@ -45,22 +44,18 @@ class _DropDownState extends State<DropDownWidget>{
                 DropdownMenuItem(
                     value: cityArr[i],
                     child: Text(cityArr[i])
-
                 )
             ],
             value: _dropdownValue.isNotEmpty ? _dropdownValue : null,
-            onChanged:  dropdownCallback,
+            onChanged: (newValue) {
+              if (newValue.toString() != _dropdownValue) { // Check if the selected value is different
+                setState(() {
+                  _dropdownValue = newValue.toString();
+                });
+                widget.onRegionSelected(_dropdownValue);
+              }
+            },
           );
     }
-  void dropdownCallback(dynamic selectedValue) {
-    if (selectedValue is String) {
-      setState(() {
-        _dropdownValue = selectedValue;
-        CityDropDown(region: _dropdownValue);
-        widget.onRegionSelected(_dropdownValue);
-      });
-    }
-
-  }
 }
 
